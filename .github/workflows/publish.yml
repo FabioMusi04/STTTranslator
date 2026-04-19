@@ -67,6 +67,6 @@ jobs:
           changelog-file: ${{ env.CHANGELOG_FILE }}
 
           # Mod Configuration
-          loaders: forge
+          loaders: neoforge
           game-versions: ${{ env.MINECRAFT_VERSION }}
           java: ${{ env.JAVA_VERSION }}
