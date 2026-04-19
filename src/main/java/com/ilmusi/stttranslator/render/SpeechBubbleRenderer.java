@@ -49,6 +49,11 @@ public class SpeechBubbleRenderer {
       translationOnline = online;
    }
 
+   public static void clearAll() {
+      PLAYER_BUBBLES.clear();
+      SIDE_PANEL.clear();
+   }
+
    private static String getFlag(String lang) {
       String var1 = lang.toLowerCase();
       byte var2 = -1;

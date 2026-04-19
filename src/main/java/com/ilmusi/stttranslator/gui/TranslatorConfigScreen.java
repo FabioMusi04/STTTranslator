@@ -5,6 +5,7 @@ import com.ilmusi.stttranslator.config.ModConfig;
 import com.ilmusi.stttranslator.render.SpeechBubbleRenderer;
 import com.ilmusi.stttranslator.translation.TranslationManager;
 import com.ilmusi.stttranslator.voice.ModelDownloader;
+import com.ilmusi.stttranslator.voice.STTVoicechatPlugin;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
@@ -272,6 +273,8 @@ g.fill(left - 16, 2, right + 16, 3, -12264124);
    }
 
    private void persistSettings() {
+      String previousSource = this.config.getSourceLanguage();
+      String previousTarget = this.config.getTargetLanguage();
       this.config.setTranslationProvider(this.selectedProvider);
       this.config.setSourceLanguage(this.selectedSourceLang);
       this.config.setTargetLanguage(this.selectedTargetLang);
@@ -286,6 +289,12 @@ g.fill(left - 16, 2, right + 16, 3, -12264124);
          } else if (this.selectedProvider == TranslationManager.Provider.CLAUDE) {
             this.config.setClaudeApiKey(key);
          }
+      }
+
+      if (!previousSource.equals(this.selectedSourceLang) || !previousTarget.equals(this.selectedTargetLang)) {
+         TranslationManager.clearAllCaches();
+         STTVoicechatPlugin.resetClientSpeechState(true);
+         SpeechBubbleRenderer.clearAll();
       }
 
    }

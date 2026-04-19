@@ -31,6 +31,8 @@ public class STTVoicechatPlugin implements VoicechatPlugin {
    });
    private static final Object CLIENT_LOCK = new Object();
    private static final StringBuilder CLIENT_CHUNK = new StringBuilder();
+   private static String clientSourceLanguage = "";
+   private static String clientTargetLanguage = "";
    private static String clientLanguage = "";
    private static String lastRecognizerText = "";
    private static String lastSubmittedFullText = "";
@@ -63,6 +65,12 @@ public class STTVoicechatPlugin implements VoicechatPlugin {
       ModConfig config = instance.getConfig();
       String sourceLang = config.getSourceLanguage();
       String targetLang = config.getTargetLanguage();
+
+      if (!sourceLang.equals(clientSourceLanguage) || !targetLang.equals(clientTargetLanguage)) {
+         resetClientSpeechState(true);
+         clientSourceLanguage = sourceLang;
+         clientTargetLanguage = targetLang;
+      }
 
       short[] rawAudio = event.getRawAudio();
       if (rawAudio == null || rawAudio.length == 0) {
@@ -152,6 +160,17 @@ public class STTVoicechatPlugin implements VoicechatPlugin {
          return;
       }
 
+      STTTranslator instance = STTTranslator.getInstance();
+      if (instance != null) {
+         ModConfig config = instance.getConfig();
+         String currentSource = config.getSourceLanguage();
+         String currentTarget = config.getTargetLanguage();
+         if (!sourceLang.equals(currentSource) || !targetLang.equals(currentTarget)) {
+            STTTranslator.LOGGER.debug("{} Dropping stale flush old={}=>{} current={}=>{}", FLOW, sourceLang, targetLang, currentSource, currentTarget);
+            return;
+         }
+      }
+
       String submitText = text;
       if (!lastSubmittedFullText.isEmpty()) {
          if (text.equals(lastSubmittedFullText)) {
@@ -176,6 +195,24 @@ public class STTVoicechatPlugin implements VoicechatPlugin {
          PacketDistributor.sendToServer(new SttSubmitPayload(submitText, sourceLang, targetLang, System.currentTimeMillis()));
       } catch (Exception e) {
          STTTranslator.LOGGER.debug("{} Failed to send STT payload to server", FLOW, e);
+      }
+   }
+
+   public static void resetClientSpeechState(boolean clearSubmittedText) {
+      synchronized(CLIENT_LOCK) {
+         if (pendingSilenceFlush != null) {
+            pendingSilenceFlush.cancel(false);
+            pendingSilenceFlush = null;
+         }
+
+         pendingSilenceGeneration++;
+         CLIENT_CHUNK.setLength(0);
+         lastRecognizerText = "";
+         silentPacketStreak = 0;
+         lastSpeechTime = 0L;
+         if (clearSubmittedText) {
+            lastSubmittedFullText = "";
+         }
       }
    }
 
