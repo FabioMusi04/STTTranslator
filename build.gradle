@@ -1,0 +1,87 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.0.192'
+}
+
+version = mod_version
+group = maven_group
+
+base {
+    archivesName = archives_base_name
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(java_version as int)
+    }
+}
+
+runs {
+    configureEach {
+        modSource project.sourceSets.main
+    }
+
+    server {
+        argument '--nogui'
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://libraries.minecraft.net/'
+    }
+    maven {
+        name = 'henkelmax.public'
+        url = 'https://maven.maxhenkel.de/repository/public'
+    }
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+    }
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neo_version}"
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}"
+    runtimeOnly "maven.modrinth:simple-voice-chat:neoforge-${voicechat_mod_version}"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.processResources {
+    filesMatching('**/*.toml') {
+        expand(
+            mod_id: mod_id,
+            mod_version: mod_version,
+            minecraft_version: minecraft_version,
+            neoforge_dependency: neoforge_dependency,
+            voicechat_api_version: voicechat_api_version
+        )
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = layout.buildDirectory.dir('repo')
+        }
+    }
+}

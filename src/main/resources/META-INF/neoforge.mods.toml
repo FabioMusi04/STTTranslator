@@ -1,0 +1,48 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "All Rights Reserved - Copyright (c) 2026 IlMusi"
+
+[[mods]]
+modId = "stttranslator"
+version = "${mod_version}"
+displayName = "STTTranslator"
+description = '''
+Real-time voice translation mod for Minecraft.
+Inspired by QSMP2's Dababel Translations.
+
+Features:
+- Voice recognition with Vosk AI (offline)
+- Multiple translation providers (LibreTranslate, Google, DeepL, Claude)
+- Speech bubbles above players
+- Dababel-style translation panel with country flags
+- Customizable themes, positions, and sizes
+
+Created by IlMusi
+Copyright (c) 2026 IlMusi - All Rights Reserved
+'''
+authors = "IlMusi"
+displayURL = ""
+logoFile = "assets/stttranslator/textures/logo.png"
+
+[[dependencies.stttranslator]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neoforge_dependency}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.stttranslator]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraft_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.stttranslator]]
+modId = "voicechat_api"
+type = "optional"
+versionRange = "[2.6,)"
+ordering = "AFTER"
+side = "BOTH"
+
+

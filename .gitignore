@@ -1,0 +1,10 @@
+/.gradle/
+/build/
+/bin/
+/runs/
+/.vscode/
+/assets/
+/com/
+/META-INF/
+*.class
+*.log

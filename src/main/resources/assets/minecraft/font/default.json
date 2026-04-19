@@ -1,0 +1,126 @@
+﻿{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_en.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE001"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_es.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE002"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_pt.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE003"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_fr.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE004"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_de.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE005"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_ko.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE006"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_ja.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE007"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_zh.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE008"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_it.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE009"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_ru.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE00A"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_ar.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE00B"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_hi.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE00C"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_th.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE00D"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_tr.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE00E"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_pl.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE00F"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_nl.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE010"]
+    },
+    {
+      "type": "bitmap",
+      "file": "stttranslator:font/flag_globe.png",
+      "ascent": 7,
+      "height": 10,
+      "chars": ["\uE000"]
+    }
+  ]
+}
+
+
+
